@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+import argparse
+from cores import core_services
+
+zeroexecServ = core_services.ZeroexecServ()
+def run_zeroexec(options, host, port):
+    zeroexecServ.rce_connection(options, host, port)
+
+def helper_zeroexec():
+    parser = argparse.ArgumentParser(
+        description="zeroexec is tool."
+    )
+    parser.add_argument(
+        '--host',
+        type=str,
+        help="Target specified host ip.",
+        required=True
+    )
+    parser.add_argument(
+        '--port',
+        type=int,
+        help="Target specified port number.",
+        required=True
+    )
+    parser.add_argument(
+        '--write-logs',
+        action="store_true",
+        default=False,
+        help="Save the target logs"
+    )
+    return parser.parse_args()
+
+if __name__ == "__main__":
+    args = helper_zeroexec()
+    run_zeroexec(args, args.host, args.port)

